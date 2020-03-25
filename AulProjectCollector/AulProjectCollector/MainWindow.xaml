@@ -1,0 +1,66 @@
+﻿<Window x:Class="AulProjectCollector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AulProjectCollector" xmlns:annularui="clr-namespace:AnnularUI"
+        mc:Ignorable="d"
+        Title="AulProjectCollector" Height="320" Width="300" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:ProgressTextConverter x:Key="ProgressTextConverter"/>
+        <Storyboard x:Key="StartStoryboard">
+            <DoubleAnimation Storyboard.TargetName="DescriptionBox" Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:00.500" BeginTime="00:00:00.000">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ProgressBox" Storyboard.TargetProperty="Opacity" To="1" Duration="00:00:00.500" BeginTime="00:00:00.500">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="EndStoryboard">
+            <DoubleAnimation Storyboard.TargetName="ProgressBox" Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:00.500" BeginTime="00:00:01.000">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="DescriptionBox" Storyboard.TargetProperty="Opacity" To="1" Duration="00:00:00.500" BeginTime="00:00:01.500">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="LoadedStoryboard">
+            <DoubleAnimation Storyboard.TargetName="LoadingMask" Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:00.500">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="DropGrid" AllowDrop="True" Drop="DropGrid_Drop">
+            <annularui:AnnularProgressBar x:Name="AProgressBar" Margin="20" TrackWidth="30"/>
+            <TextBlock x:Name="DescriptionBox" TextAlignment="Center" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="1">
+            <Run Text="Exo项目文件"/>
+            <LineBreak/>
+            <Run Text="Auz归档文件"/>
+            <LineBreak/>
+            <Run Text="拖拽至此"/>
+            </TextBlock>
+            <TextBlock x:Name="ProgressBox" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ElementName=AProgressBar, Path=DisplayedValue, Converter={StaticResource ProgressTextConverter}}" Opacity="0"/>
+        </Grid>
+        <Grid Grid.Row="0" x:Name="LoadingMask" Background="#99ffffff">
+            <TextBlock Text="请稍后..." FontSize="26" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Ver. 0.1.0  |  by 瑄  " Opacity="0.5"/>
+        </Border>
+    </Grid>
+</Window>
