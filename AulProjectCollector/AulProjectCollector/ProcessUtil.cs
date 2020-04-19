@@ -102,10 +102,13 @@ namespace AulProjectCollector
                         // Find fonts
                         if (subItem.Name == "Text")
                         {
-                            string font = subItem.Params["font"];
-                            if (fontNamesSet.Add(font))
+                            if (subItem.Params.ContainsKey("file"))
                             {
-                                Console.WriteLine("[{0}] [Info] Font found in the project: {1}", GetType().Name, font);
+                                string font = subItem.Params["font"];
+                                if (fontNamesSet.Add(font))
+                                {
+                                    Console.WriteLine("[{0}] [Info] Font found in the project: {1}", GetType().Name, font);
+                                }
                             }
                         }
                     }
@@ -260,8 +263,11 @@ namespace AulProjectCollector
                                     if (subItem.Params.ContainsKey("file"))
                                     {
                                         string filePath = subItem.Params["file"];
-                                        string archivedPath = archivedFileMap[filePath];
-                                        subItem.Params["file"] = string.Format(".\\{0}", archivedPath);
+                                        if (archivedFileMap.ContainsKey(filePath))
+                                        {
+                                            string archivedPath = archivedFileMap[filePath];
+                                            subItem.Params["file"] = string.Format(".\\{0}", archivedPath);
+                                        }
                                     }
                                 }
                             }

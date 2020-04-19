@@ -60,7 +60,7 @@
             <TextBlock Text="请稍后..." FontSize="26" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="LightGray">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Ver. 0.1.0  |  by 瑄  " Opacity="0.5"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Ver. 0.1.1  |  by 瑄  " Opacity="0.5"/>
         </Border>
     </Grid>
 </Window>
